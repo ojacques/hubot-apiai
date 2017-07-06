@@ -8,7 +8,7 @@ in turns handles the dialog and detects intents and parameters.
 Finally, the script [emits an event (robot.emit)](https://github.com/hubotio/hubot/blob/master/docs/scripting.md#events)
 so that it can be consumed by other scripts.
 
-![example](img/hubot-apiai.gif)
+![example](https://raw.githubusercontent.com/ojacques/hubot-apiai/HEAD/img/hubot-api-ai.gif)
 
 See [`src/apiai.coffee`](https://github.com/ojacques/hubot-apiai/blob/master/src/apiai.coffee) 
 for full documentation.
