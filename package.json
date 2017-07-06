@@ -1,9 +1,9 @@
 {
   "name": "hubot-apiai",
   "description": "Add smartness to hubot with API.AI",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Olivier Jacques <ojacques2@gmail.com>",
-  "keywords": "hubot, hubot-scripts, apiai, natural, language, understanding, NLU",
+  "keywords": "hubot, hubot-scripts, apiai, api.ai, natural, language, understanding, NLU",
   
   "repository": {
     "type": "git",
