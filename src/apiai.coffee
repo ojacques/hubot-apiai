@@ -44,12 +44,13 @@ module.exports = (robot) ->
     # Process conversation with AI back-end
     unless process.env.API_AI_CLIENT_ACCESS_TOKEN?
       msg.send "I need a token to be smart :grin:"
-      console.log "ERROR: API_AI_CLIENT_ACCESS_TOKEN not set"
+      robot.logger.error "API_AI_CLIENT_ACCESS_TOKEN not set"
       return
 
+    robot.logger.debug("Calling API.AI with '#{query}' and session #{session}")
     request = ai.textRequest(query, {sessionId: session})
     request.on('response', (response) ->
-      console.log(response)
+      robot.logger.debug("From API.AI: " + util.inspect(response))
       if (response.result.actionIncomplete is true)
         # Still refining...
         msg.send(response.result.fulfillment.speech)
@@ -58,10 +59,10 @@ module.exports = (robot) ->
                response.result.action isnt "input.unknown")
 
         # API.AI has determined the intent
-        #msg.send(util.inspect(response.result.fulfillment.speech))
-        console.log "Intent determined! " +
+        msg.send(response.result.fulfillment.speech)
+        robot.logger.info("Emitting robot action: " +
                     response.result.metadata.intentName + ", " +
-                    util.inspect(response.result.parameters)
+                    util.inspect(response.result.parameters))
         # Emit event with message context and parameters
         robot.emit response.result.metadata.intentName, msg, response.result.parameters
       else
@@ -70,6 +71,6 @@ module.exports = (robot) ->
           msg.send(response.result.fulfillment.speech)
     )
     request.on('error', (error) ->
-      console.log(error)
+      robot.logger.error(error)
     )
     request.end()
