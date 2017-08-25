@@ -31,9 +31,9 @@ module.exports = (robot) ->
 
   getSession = (msg) ->
     # Get session context from a thread, or create a user specific session
-    if robot.adapterName = 'flowdock'
+    if robot.adapterName == 'flowdock'
       return msg.message.metadata.thread_id
-    else if robot.adapterName = 'slack'
+    else if robot.adapterName == 'slack'
       return msg.message.rawMessage.thread_ts
     else
       # We can't rely on threading mechanism: fallback to one session per user
