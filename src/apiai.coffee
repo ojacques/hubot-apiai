@@ -34,7 +34,8 @@ module.exports = (robot) ->
     if robot.adapterName == 'flowdock'
       return msg.message.metadata.thread_id
     else if robot.adapterName == 'slack'
-      return msg.message.rawMessage.thread_ts
+      #Using the user id as the sessionId allows chat continuity to the bot from either channel mentions or direct messages. If you want direct messages and channel mentions to the bot handled differently, you can append the channel/room id. Append this in the returned session this: "msg.message.rawMessage.channel.id"
+      return msg.message.user.id
     else
       # We can't rely on threading mechanism: fallback to one session per user
       session_id = "session-" + msg.message.user["id"];
